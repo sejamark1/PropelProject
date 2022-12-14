@@ -1,0 +1,14 @@
+[
+    {
+      "id" : 1,
+      "isbn_no" : "9939392-3-322",
+      "book_name" : "Harry Potter",
+      "author_name" : "JKROWLING"
+    },
+    {
+      "id" : 1,
+      "isbn_no" : "9939392-3-322",
+      "book_name" : "Harry Potter",
+      "author_name" : "JKROWLING"
+    }
+  ]
