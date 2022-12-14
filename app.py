@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect
 import json 
 import uuid
 from mypyfiles.jsonHandler import JSONHandler
-from mypyfiles.book import Book
+from mypyfiles.addressbook import Book
 
 FILE_PATH = "data/addressbook.json"
 
@@ -13,10 +13,12 @@ jsonDataHandler = JSONHandler(FILE_PATH)
 
 def __requestForm(): 
     generate_unique_id = uuid.uuid4().int
-    r_isbn_no = request.form["isbn"]
-    r_book_name = request.form["bookname"]
-    r_author_name = request.form["authorname"]
-    newBook = Book(generate_unique_id, r_isbn_no, r_book_name,r_author_name)
+    r_name = request.form["contactName"]
+    r_address = request.form["contactAddress"]
+    r_postcode = request.form["contactPostcode"]
+    r_mobile = request.form["contactMobile"]
+    r_email = request.form["contactEmail"]
+    newBook = Book(generate_unique_id, r_name, r_address, r_postcode, r_mobile, r_email)
     return newBook
 
 

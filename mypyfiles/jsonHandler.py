@@ -1,5 +1,5 @@
 import json 
-from mypyfiles.book import Book
+from mypyfiles.addressbook import Book
 
 
 class JSONHandler():
@@ -30,7 +30,7 @@ class JSONHandler():
         json_data = self.returnRawJsonData()
         book_data = [] 
         for data in json_data: 
-            book = Book(data["id"], data["isbn_no"], data["book_name"], data["author_name"])
+            book = Book(data["id"], data["name"], data["address"], data["postcode"],data["mobile"],data["email"] )
             book_data.append(book)
 
         return book_data

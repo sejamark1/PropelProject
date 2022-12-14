@@ -12,16 +12,20 @@
         <div id="view-book-table">
             <table id="bookstore-table">
                 <tr id="table-header">
-                    <th>Book Name </th>
-                    <th>ISBN Number </th>
-                    <th>Author </th>
+                    <th> Name </th>
+                    <th>Address </th>
+                    <th>Postcode</th>
+                    <th>Mobile</th>
+                    <th>Email </th>
                 </tr>
 
                 {%for book in booksData%}
                 <tr id="table-data-row">
-                    <td class="table-data" > {{book.getISBNNo()}} </td>
-                    <td class="table-data" > {{book.getBookName()}} </td>
-                    <td class="table-data" > {{book.getAuthorName()}} </td>
+                    <td class="table-data" > {{book.getName()}} </td>
+                    <td class="table-data" > {{book.getAddress()}} </td>
+                    <td class="table-data" > {{book.getPostcode()}} </td>
+                    <td class="table-data" > {{book.getMobile()}} </td>
+                    <td class="table-data" > {{book.getEmail()}} </td>
                     <td>
                         <a href="{{url_for ('delete_data_from_json_file', id=book.getId())}}">
                             <input  type="submit" value="Delete" />
@@ -46,13 +50,17 @@
         <div>
             <p>Add your book</p>
             <form action="/add" method="post" >
-                <label>ISBN number</label>
-                <input type="text" id="editIsbn" name="isbn"><br>
-                <label>Book name</label>
-                <input type="text" id="editBookname" name="bookname"  ><br>
-                <label>Author name</label>
-                <input type="text" id="editAuthorname" name="authorname" ><br>
-                <input  type="submit" value="Add New Book" />
+                <label>Name</label>
+                <input type="text" id="contact_name" name="contactName"><br>
+                <label>Address</label>
+                <input type="text" id="contact_address" name="contactAddress"><br>
+                <label>Postcode</label>
+                <input type="text" id="contact_postcode" name="contactPostcode"><br>
+                <label>Mobile</label>
+                <input type="text" id="contact_mobile" name="contactMobile"  ><br>
+                <label>Email</label>
+                <input type="text" id="contact_email" name="contactEmail" ><br>
+                <input  type="submit" value="Add Contact" />
 
             </form>
         
