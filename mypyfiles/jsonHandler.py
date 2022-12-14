@@ -7,6 +7,21 @@ class JSONHandler():
         self.FILE_PATH = file_path
 
 
+
+    def __frontAndBackSearch(self, id): 
+        fetched_data_arr_of_book = self.returnBookClassData()
+        front = 0 
+        back = len(fetched_data_arr_of_book) - 1 
+        found_at = None 
+        while front <= back: 
+            if fetched_data_arr_of_book[front].getId() == id:
+                found_at = front
+                break 
+            elif fetched_data_arr_of_book[back].getId() == id:
+                found_at = back 
+                break 
+        return fetched_data_arr_of_book[found_at]
+
     """
     RETURN: Array of JSON Data
     """
@@ -34,6 +49,7 @@ class JSONHandler():
             book_data.append(book)
 
         return book_data
+
     """
     ADD: 
     par: newBook : json converted format 
@@ -63,3 +79,23 @@ class JSONHandler():
 
 
 
+    """
+
+    """
+    def getJsonDataById(self, id): 
+        return self.__frontAndBackSearch(id)
+        
+    def replaceExistingDataWithEdited(self, editedData:Book): 
+        fetched_json_data = self.returnRawJsonData()
+        update_entry_after_edit = []
+        for i in range(len(fetched_json_data)): 
+            if str(fetched_json_data[i]["id"]) == str(editedData.getId()): 
+                update_entry_after_edit.append(editedData.convertToJSONFormat())
+            else: 
+                update_entry_after_edit.append(fetched_json_data[i])
+        self.__insert_data_into_json_file(update_entry_after_edit, self.FILE_PATH)
+
+
+
+
+            

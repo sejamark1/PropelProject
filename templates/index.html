@@ -7,6 +7,8 @@
     <title>Address Book Store</title>
 </head>
 <body>
+    {% if editpage == "no" %}
+
     <div id="main-container" style="display: flex">
 
         <div id="view-book-table">
@@ -22,7 +24,7 @@
                 {%for book in booksData%}
                 <tr id="table-data-row">
                     <td class="table-data" > {{book.getName()}} </td>
-                    <td class="table-data" > {{book.getAddress()}} </td>
+                    <td contenteditable='true' class="table-data" > {{book.getAddress()}} </td>
                     <td class="table-data" > {{book.getPostcode()}} </td>
                     <td class="table-data" > {{book.getMobile()}} </td>
                     <td class="table-data" > {{book.getEmail()}} </td>
@@ -32,7 +34,7 @@
                         </a>
                     </td>
                     <td>
-                        <a>
+                        <a href="{{url_for ('edit_data_and_submit_to_json_file', id=book.getId())}}">
                             <input type="submit" value="EDIT" />
                         </a>
                     </td>
@@ -65,6 +67,30 @@
             </form>
         
         </div>
+
+        {% endif %}
     
+
+
+        {% if editpage == "yes"%}
+        <div>
+            <p>Add your book</p>
+            <form action="/submit-edit" method="post" >
+                <label>Name</label>
+                <input type="text" id="contact_name" name="contactName" value="{{dataById.getName()}}"><br>
+                <label>Address</label>
+                <input type="text" id="contact_address" name="contactAddress" value="{{dataById.getAddress()}}"><br>
+                <label>Postcode</label>
+                <input type="text" id="contact_postcode" name="contactPostcode" value="{{dataById.getPostcode()}}"><br>
+                <label>Mobile</label>
+                <input type="text" id="contact_mobile" name="contactMobile"   value="{{dataById.getMobile()}}"><br>
+                <label>Email</label>
+                <input type="text" id="contact_email" name="contactEmail"  value="{{dataById.getEmail()}}"><br>
+                <input  type="submit" value="Submit Edit" />
+            </form>
+        
+        </div>
+
+        {% endif %}
 </body>
 </html>
