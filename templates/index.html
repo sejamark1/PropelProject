@@ -24,8 +24,8 @@
                     <td class="table-data" > {{book.getBookName()}} </td>
                     <td class="table-data" > {{book.getAuthorName()}} </td>
                     <td>
-                        <a>
-                            <input type="submit" value="Delete" />
+                        <a href="{{url_for ('delete_data_from_json_file', id=book.getId())}}">
+                            <input  type="submit" value="Delete" />
     
                         </a>
                     </td>
