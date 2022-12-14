@@ -34,8 +34,19 @@ class JSONHandler():
             book_data.append(book)
 
         return book_data
+    """
+    ADD: 
+    par: newBook : json converted format 
+    """
+    def addDataToJsonFile(self, newBook):
+        fetched_json_data = self.returnRawJsonData()
+        update_entry_after_new_add= []
+        for data in fetched_json_data: 
+            update_entry_after_new_add.append(data) 
+        update_entry_after_new_add.append(newBook) 
+        self.__insert_data_into_json_file(update_entry_after_new_add, self.FILE_PATH)
 
-
+        
     """
     DELETE: 
     """

@@ -25,7 +25,6 @@
                     <td>
                         <a href="{{url_for ('delete_data_from_json_file', id=book.getId())}}">
                             <input  type="submit" value="Delete" />
-    
                         </a>
                     </td>
                     <td>
@@ -45,16 +44,16 @@
 
         
         <div>
-            <p>Edit your data</p>
-            <form action="" method="post">
+            <p>Add your book</p>
+            <form action="/add" method="post" >
                 <label>ISBN number</label>
                 <input type="text" id="editIsbn" name="isbn"><br>
                 <label>Book name</label>
                 <input type="text" id="editBookname" name="bookname"  ><br>
                 <label>Author name</label>
                 <input type="text" id="editAuthorname" name="authorname" ><br>
-                <input type="submit" value="Submit Edit" />
-        
+                <input  type="submit" value="Add New Book" />
+
             </form>
         
         </div>

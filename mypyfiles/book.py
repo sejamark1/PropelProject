@@ -1,3 +1,4 @@
+import json
 class Book: 
     def __init__(self, id, isbn_no, book_name, author_name):
         self.id = id 
@@ -34,6 +35,11 @@ class Book:
     def setAuthorName(self, author_name): 
         self.author_name = author_name
         
-        
-
+    def convertToJSONFormat(self):
+        return {
+           "id" : self.id,
+            "isbn_no": self.isbn_no,
+            "book_name": self.book_name,
+            "author_name": self.author_name 
+        }
 
