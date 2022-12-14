@@ -8,7 +8,41 @@
 </head>
 <body>
 
-    <p>afadsf</p>
+    <div id="main-container" style="display: flex">
+
+        <div id="view-book-table">
+            <table id="bookstore-table">
+                <tr id="table-header">
+                    <th>Book Name </th>
+                    <th>ISBN Number </th>
+                    <th>Author </th>
+                </tr>
+                {%for book in booksData%}
+
+                <tr id="table-data-row">
+                    <td class="table-data" > {{book.getISBNNo()}} </td>
+                    <td class="table-data" > {{book.getBookName()}} </td>
+                    <td class="table-data" > {{book.getAuthorName()}} </td>
+                    <td>
+                        <a>
+                            <input type="submit" value="Delete" />
+    
+                        </a>
+                    </td>
+                    <td>
+                        <a>
+                            <input type="submit" value="EDIT" />
+                        </a>
+                    </td>
+                </tr>
+                {%endfor%}
+
+
+
+            </table>
+        </div>
+
+        
 
 
 
