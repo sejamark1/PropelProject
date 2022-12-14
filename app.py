@@ -16,7 +16,7 @@ def index():
 
 
 
-
+#DELETE
 @app.route("/delete/<int:id>") 
 def delete_data_from_json_file(id): 
     jsonDataHandler.deleteJSONDataWithGivenId(id)
@@ -24,7 +24,18 @@ def delete_data_from_json_file(id):
     return render_template("index.html", booksData = books_data)
 
 
+# #EDIT
+# @app.route("/edit/<int:id>") 
+# def edit_data_and_submit_to_json_file(id): 
+#     jsonDataHandler.deleteJSONDataWithGivenId(id)
+#     books_data = jsonDataHandler.returnBookClassData()
+#     return render_template("index.html", booksData = books_data)
 
+
+@app.route("/edit")
+def edit_page(): 
+    pass
+    # return render_template("edit-data.html")
 
 if __name__ == "__main__": 
     app.run(debug=True) 

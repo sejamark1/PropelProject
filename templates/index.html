@@ -7,7 +7,6 @@
     <title>Address Book Store</title>
 </head>
 <body>
-
     <div id="main-container" style="display: flex">
 
         <div id="view-book-table">
@@ -17,8 +16,8 @@
                     <th>ISBN Number </th>
                     <th>Author </th>
                 </tr>
-                {%for book in booksData%}
 
+                {%for book in booksData%}
                 <tr id="table-data-row">
                     <td class="table-data" > {{book.getISBNNo()}} </td>
                     <td class="table-data" > {{book.getBookName()}} </td>
@@ -42,10 +41,23 @@
             </table>
         </div>
 
+
+
         
-
-
-
+        <div>
+            <p>Edit your data</p>
+            <form action="" method="post">
+                <label>ISBN number</label>
+                <input type="text" id="editIsbn" name="isbn"><br>
+                <label>Book name</label>
+                <input type="text" id="editBookname" name="bookname"  ><br>
+                <label>Author name</label>
+                <input type="text" id="editAuthorname" name="authorname" ><br>
+                <input type="submit" value="Submit Edit" />
+        
+            </form>
+        
+        </div>
     
 </body>
 </html>
