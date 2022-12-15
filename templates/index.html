@@ -9,13 +9,25 @@
 </head>
 <body>
 
-    <div id="header">
-        <h1 id="logo">Address Book</h1>
+    <div id="header" >
+        <a href="/">
+            <h1 id="logo">Address Book</h1>
+        </a>
+        <div id="search_box"> 
+            <form action="/search" method="post" >
+                <input id="search_results" type="text" name="searchResults" placeholder="Search...">
+                <input  type="submit" value="Search" />
+            </form> 
+
+        </div>
     </div>
 
     {% if editpage == "no" %}
     <div id="main-container" style="display: flex">
 
+        {%if is_it_search == "yes"%}
+            <p id="search_result_data">Your search result for: {{queryData}}</p>
+        {%endif%}
         <div id="view-book-table">
             <table id="bookstore-table">
                 <tr id="table-header">

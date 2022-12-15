@@ -35,7 +35,6 @@ def index():
 
 
 #DELETE
-
 """
 DELETE: 
 id given, passed to deleteJSONDataWithGivenId from jsonDataHandler.class.
@@ -59,6 +58,8 @@ return:
 @app.route("/edit/<int:id>") 
 def edit_data_and_submit_to_json_file(id): 
     book_data_by_id = jsonDataHandler.getJsonDataById(id)
+    print("Edit")
+
     readAndWrite.write_current_editId(id)
     return render_template("index.html", dataById = book_data_by_id, editpage="yes")
 
@@ -88,6 +89,12 @@ def add_data():
     return redirect("/")
 
 
+@app.route("/search", methods=["GET", "POST"])
+def search_data(): 
+    r_search_result = requestData.requestSearchForm() 
+    print("Searched " + r_search_result)
+    address_book_search_result = jsonDataHandler.returnSearchResults(r_search_result)
+    return render_template("index.html", booksData = address_book_search_result, editpage="no", is_it_search="yes", queryData = str(r_search_result))
 
 if __name__ == "__main__": 
     app.run(debug=True) 

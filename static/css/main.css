@@ -3,17 +3,31 @@
     font-family: sans-serif;
 
 }
+a{ 
+    text-decoration: none;
+    color: white;
+}
 #header{ 
     width: 100%;
     height: 50px;
     background-color: #0c4bcc;
     color: white;
+    display: flex;
 }
 #logo{ 
     padding: 12px 40px;
     font-weight: 100;
     letter-spacing: 2px;
     font-size: 22px;
+}
+
+#search_result_data{
+    position: absolute;
+    background: red;
+    padding: 6px;
+    text-align: center;
+    padding-left: 7px;
+    font-weight: bold;
 }
 
 #view-book-table{ 
@@ -72,12 +86,12 @@
     color: white;
 }
 
-#add-contact-form > form{
+#add-contact-form > form, #edit-form > form{
     text-align: center;
     padding-top: 20px;
     background: wheat;
 }
-#add-form > label{ 
+#add-form > label, #edit-form > label{ 
     font-size: 17px;
     font-weight: bold;
 }
