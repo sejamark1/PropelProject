@@ -52,7 +52,7 @@ class Book:
         
     def convertToJSONFormat(self):
         return     {
-        "id": self.id,
+        "id": int(self.id),
         "name" : self.name,  
         "address" : self.address,  
         "postcode" : self.postcode, 

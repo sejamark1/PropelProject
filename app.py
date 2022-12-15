@@ -7,8 +7,8 @@ from mypyfiles.readandwritefiles import ReadAndWrite
 FILE_PATH = "data/addressbook.json"
 
 app = Flask(__name__) 
-jsonDataHandler = JSONHandler(FILE_PATH)
 readAndWrite = ReadAndWrite()
+jsonDataHandler = JSONHandler(FILE_PATH, readAndWrite)
 
 """
 This function is used for both requesting <form> value for the purpose of adding to the JSON FILE and adding the 
@@ -42,8 +42,7 @@ def index():
 @app.route("/delete/<int:id>") 
 def delete_data_from_json_file(id): 
     jsonDataHandler.deleteJSONDataWithGivenId(id)
-    books_data = jsonDataHandler.returnBookClassData()
-    return render_template("index.html", booksData = books_data, editpage="no")
+    return redirect("/")
 
 
 #EDIT
@@ -59,7 +58,6 @@ def edit_data_and_submit_to_json_file1(): #change the name
     edit_id = readAndWrite.read_current_editId()
     edited_book = __requestForm(editId=edit_id)
     jsonDataHandler.replaceExistingDataWithEdited(edited_book)
-
     return redirect("/")
 
 
