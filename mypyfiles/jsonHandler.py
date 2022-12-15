@@ -1,6 +1,6 @@
 import json 
-from mypyfiles.addressbook import Book
-from mypyfiles.readandwritefiles import ReadAndWrite
+from mypyfiles.addressBook import Book
+from mypyfiles.readAndWriteFiles import ReadAndWrite
 
 
 class JSONHandler():
@@ -54,22 +54,11 @@ class JSONHandler():
     """
     DELETE: 
     """
-    # def deleteJSONDataWithGivenId(self, delete_id):
-    #     fetched_json_data = self.readAndWrite.returnJsonDataFromFile(self.FILE_PATH)
-    #     del_id = delete_id
-    #     update_entry_after_delete = [] 
-    #     for data in fetched_json_data: 
-    #         if(data["id"] == del_id): 
-    #             pass 
-    #         else: 
-    #             update_entry_after_delete.append(data) 
-    #     self.readAndWrite.insert_data_into_json_file(update_entry_after_delete, self.FILE_PATH)
-
 
     def deleteJSONDataWithGivenId(self, delete_id):
         fetched_json_data = self.readAndWrite.returnJsonDataFromFile(self.FILE_PATH)
         del_id = delete_id
-        update_entry_after_delete = self.__filter("del", fetched_json_data, del_id, None)
+        update_entry_after_delete = self.__filterJSONData("del", fetched_json_data, del_id, None)
         self.readAndWrite.insert_data_into_json_file(update_entry_after_delete, self.FILE_PATH)
 
 
@@ -78,20 +67,10 @@ class JSONHandler():
     """
     def getJsonDataById(self, id): 
         return self.__frontAndBackSearch(id)
-        
-    # def replaceExistingDataWithEdited(self, editedData:Book): 
-    #     fetched_json_data = self.readAndWrite.returnJsonDataFromFile(self.FILE_PATH)
-    #     update_entry_after_edit = []
-    #     for data in fetched_json_data: 
-    #         if int(data["id"]) == int(editedData.getId()): 
-    #             update_entry_after_edit.append(editedData.convertToJSONFormat())
-    #         else: 
-    #             update_entry_after_edit.append(data)
-    #     self.readAndWrite.insert_data_into_json_file(update_entry_after_edit, self.FILE_PATH)
 
     def replaceExistingDataWithEdited(self, editedData:Book): 
         fetched_json_data = self.readAndWrite.returnJsonDataFromFile(self.FILE_PATH)
-        update_entry_after_edit = self.__filter("edit", fetched_json_data, editedData.getId(), editedData)
+        update_entry_after_edit = self.__filterJSONData("edit", fetched_json_data, editedData.getId(), editedData)
         self.readAndWrite.insert_data_into_json_file(update_entry_after_edit, self.FILE_PATH)
     """
     purpose: 
@@ -101,7 +80,7 @@ class JSONHandler():
     compareId: id to compare  
     editData: given on purpose="replace"
     """
-    def __filter(self, purpose, fetchedData, compareId, editData:Book = None): 
+    def __filterJSONData(self, purpose, fetchedData, compareId, editData:Book = None): 
         update_entry_after = []
         for data in fetchedData:
             if int(data["id"]) == int(compareId):

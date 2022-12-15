@@ -2,85 +2,90 @@ from flask import Flask, render_template, request, redirect
 import json 
 import uuid
 from mypyfiles.jsonHandler import JSONHandler
-from mypyfiles.addressbook import Book
-from mypyfiles.readandwritefiles import ReadAndWrite
-FILE_PATH = "data/addressbook.json"
+from mypyfiles.addressBook import Book
+from mypyfiles.readAndWriteFiles import ReadAndWrite
+from mypyfiles.requestData import RequestData
+
+
 
 app = Flask(__name__) 
+
+FILE_PATH = "data/addressbook.json"
+
+requestData = RequestData()
 readAndWrite = ReadAndWrite()
 jsonDataHandler = JSONHandler(FILE_PATH, readAndWrite)
 
+
+
+
+#VIEW/READ
 """
-This function is used for both requesting <form> value for the purpose of adding to the JSON FILE and adding the 
-edited data to the JSON FILE. 
-
+VIEW/READ
+books_data: store data fetched from jsonDataHandler.class using returnBookClassData()
+returns: 
+    index.html: home page with view and add data functionality. 
+    booksData:Book - all the book data fetched. 
+    editpage: no
 """
-def __requestForm(editId=None): 
-    if(editId == None): 
-        generate_unique_id = uuid.uuid4().int
-    else: 
-        generate_unique_id = editId # an existing id        
-    r_name = request.form["contactName"]
-    r_address = request.form["contactAddress"]
-    r_postcode = request.form["contactPostcode"]
-    r_mobile = request.form["contactMobile"]
-    r_email = request.form["contactEmail"]
-    newBook = Book(generate_unique_id, r_name, r_address, r_postcode, r_mobile, r_email)
-    return newBook
-
-
-
-#Home page: View All Data from the json file.
 @app.route("/")
 def index(): 
     books_data = jsonDataHandler.returnBookClassData()
     return render_template("index.html", booksData = books_data, editpage="no")
 
 
-
 #DELETE
+
+"""
+DELETE: 
+id given, passed to deleteJSONDataWithGivenId from jsonDataHandler.class.
+redirect to home page.
+"""
 @app.route("/delete/<int:id>") 
 def delete_data_from_json_file(id): 
     jsonDataHandler.deleteJSONDataWithGivenId(id)
     return redirect("/")
 
-
-#EDIT
+#EDIT/UPDATE
+"""
+EDIT/UPDATE
+On press, single data is fetched by given id and stored in book_data_by_id. 
+from ReadAndWrite, it stores the current edit id. 
+return: 
+    index.html: template with only form to edit. 
+    dataById:Book - single book data. 
+    editpage: "yes" only will show edit form. 
+"""
 @app.route("/edit/<int:id>") 
 def edit_data_and_submit_to_json_file(id): 
     book_data_by_id = jsonDataHandler.getJsonDataById(id)
     readAndWrite.write_current_editId(id)
     return render_template("index.html", dataById = book_data_by_id, editpage="yes")
 
-
+"""
+EDIT/UPDATE COUT'D
+edit_id: get the current id in editing progress from info.txt. 
+edited_book:Book -  request new edited data from the form. 
+edited_book passed to replaceExistingDataWithEdited from jsonDataHandler.class to be updated. 
+"""
 @app.route("/submit-edit", methods=["POST"]) 
 def edit_data_and_submit_to_json_file1(): #change the name
     edit_id = readAndWrite.read_current_editId()
-    edited_book = __requestForm(editId=edit_id)
+    edited_book = requestData.requestForm(editId=edit_id)
     jsonDataHandler.replaceExistingDataWithEdited(edited_book)
     return redirect("/")
 
-
-
-
-
-
-
-
-#ADD
+#ADD/CREATE
+"""
+ADD/CREATE: 
+newBook request the entered value from the form, 
+pass it to addDataToJsonFile method from jsonDataHandler.class. 
+"""
 @app.route("/add", methods=["POST", "GET"])
 def add_data(): 
-    newBook = __requestForm()
-    print(newBook.convertToJSONFormat())
+    newBook = requestData.requestForm()
     jsonDataHandler.addDataToJsonFile(newBook.convertToJSONFormat())
     return redirect("/")
-
-
-
-
-
-
-
 
 
 
