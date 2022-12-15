@@ -5,10 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Address Book Store</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')  }}">
 </head>
 <body>
-    {% if editpage == "no" %}
 
+    <div id="header">
+        <h1 id="logo">Address Book</h1>
+    </div>
+
+    {% if editpage == "no" %}
     <div id="main-container" style="display: flex">
 
         <div id="view-book-table">
@@ -23,17 +28,17 @@
 
                 {%for book in booksData%}
                 <tr id="table-data-row">
-                    <td class="table-data" > {{book.getName()}} </td>
-                    <td contenteditable='true' class="table-data" > {{book.getAddress()}} </td>
-                    <td class="table-data" > {{book.getPostcode()}} </td>
-                    <td class="table-data" > {{book.getMobile()}} </td>
-                    <td class="table-data" > {{book.getEmail()}} </td>
-                    <td>
+                    <td class="table-data row_book_data" > {{book.getName()}} </td>
+                    <td class="table-data row_book_data" > {{book.getAddress()}} </td>
+                    <td class="table-data row_book_data" > {{book.getPostcode()}} </td>
+                    <td class="table-data row_book_data" > {{book.getMobile()}} </td>
+                    <td class="table-data row_book_data" > {{book.getEmail()}} </td>
+                    <td class="btn_row_book_data_del">
                         <a href="{{url_for ('delete_data_from_json_file', id=book.getId())}}">
                             <input  type="submit" value="Delete" />
                         </a>
                     </td>
-                    <td>
+                    <td class="btn_row_book_data_edit">
                         <a href="{{url_for ('edit_data_and_submit_to_json_file', id=book.getId())}}">
                             <input type="submit" value="EDIT" />
                         </a>
@@ -51,18 +56,18 @@
         
         <div id="add-contact-form">
             <p>Add your book</p>
-            <form action="/add" method="post" >
-                <label>Name</label>
-                <input type="text" id="contact_name" name="contactName"><br>
+            <form id="add-form" action="/add" method="post" >
+                <label>Name</label> 
+                <input class="add-form-data-input" type="text" id="contact_name" name="contactName"><br>
                 <label>Address</label>
-                <input type="text" id="contact_address" name="contactAddress"><br>
+                <input class="add-form-data-input" type="text" id="contact_address" name="contactAddress"><br>
                 <label>Postcode</label>
-                <input type="text" id="contact_postcode" name="contactPostcode"><br>
+                <input class="add-form-data-input" type="text" id="contact_postcode" name="contactPostcode"><br>
                 <label>Mobile</label>
-                <input type="text" id="contact_mobile" name="contactMobile"  ><br>
+                <input class="add-form-data-input" type="text" id="contact_mobile" name="contactMobile"  ><br>
                 <label>Email</label>
-                <input type="text" id="contact_email" name="contactEmail" ><br>
-                <input  type="submit" value="Add Contact" />
+                <input class="add-form-data-input" type="text" id="contact_email" name="contactEmail" ><br>
+                <input class="add-form-submit" type="submit" value="Add Contact" />
 
             </form>
         
@@ -77,16 +82,16 @@
             <p>Add your book</p>
             <form action="/submit-edit" method="post" >
                 <label>Name</label>
-                <input type="text" id="contact_name" name="contactName" value="{{dataById.getName()}}"><br>
+                <input class="add-form-data-input" type="text" id="contact_name" name="contactName" value="{{dataById.getName()}}"><br>
                 <label>Address</label>
-                <input type="text" id="contact_address" name="contactAddress" value="{{dataById.getAddress()}}"><br>
+                <input class="add-form-data-input" type="text" id="contact_address" name="contactAddress" value="{{dataById.getAddress()}}"><br>
                 <label>Postcode</label>
-                <input type="text" id="contact_postcode" name="contactPostcode" value="{{dataById.getPostcode()}}"><br>
+                <input class="add-form-data-input" type="text" id="contact_postcode" name="contactPostcode" value="{{dataById.getPostcode()}}"><br>
                 <label>Mobile</label>
-                <input type="text" id="contact_mobile" name="contactMobile"   value="{{dataById.getMobile()}}"><br>
+                <input class="add-form-data-input" type="text" id="contact_mobile" name="contactMobile"   value="{{dataById.getMobile()}}"><br>
                 <label>Email</label>
-                <input type="text" id="contact_email" name="contactEmail"  value="{{dataById.getEmail()}}"><br>
-                <input  type="submit" value="Submit Edit" />
+                <input class="add-form-data-input" type="text" id="contact_email" name="contactEmail"  value="{{dataById.getEmail()}}"><br>
+                <input class="add-form-submit" type="submit" value="Submit Edit" />
             </form>
         
         </div>

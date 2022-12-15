@@ -4,6 +4,8 @@ import uuid
 
 class RequestData: 
     """
+    params: editedId
+    returns: newBook:Book
     This function is used for both requesting <form> value for the purpose of adding to the JSON FILE and adding the 
     edited data to the JSON FILE. 
     Get data from <div id="add-contact-form"> and <div id="edit-form">

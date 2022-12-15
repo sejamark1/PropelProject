@@ -9,7 +9,13 @@ class JSONHandler():
         self.readAndWrite = readAndWrite
 
 
-
+    """
+    Private method.
+    params: id:int
+    RETURNS: Type:Book - single book based on given id.
+    Does a front and back search on all the data (fetched_data_arr_of_book:arr)
+    and finds the Book based on given id. 
+    """
     def __frontAndBackSearch(self, id): 
         fetched_data_arr_of_book = self.returnBookClassData()
         front = 0 
@@ -39,8 +45,8 @@ class JSONHandler():
         return book_data
 
     """
-    ADD: 
-    par: newBook : json converted format 
+    params; newBook:Book (json converted format)
+    Gets the new data and inserted into JSON file. 
     """
     def addDataToJsonFile(self, newBook):
         fetched_json_data = self.readAndWrite.returnJsonDataFromFile(self.FILE_PATH)
@@ -52,7 +58,8 @@ class JSONHandler():
 
         
     """
-    DELETE: 
+    params: deleted_id:int
+    Deletes the data from the JSON database based on the id:int provided.
     """
 
     def deleteJSONDataWithGivenId(self, delete_id):
@@ -63,16 +70,24 @@ class JSONHandler():
 
 
     """
-
+    params:id:int
+    Returns Book data based on Id. 
+    Note: for public access. 
     """
     def getJsonDataById(self, id): 
         return self.__frontAndBackSearch(id)
+
+    """
+    params: editedData:Book
+    Takes the editedData:Book and replaces it with its existing data thus updating the results. 
+    """
 
     def replaceExistingDataWithEdited(self, editedData:Book): 
         fetched_json_data = self.readAndWrite.returnJsonDataFromFile(self.FILE_PATH)
         update_entry_after_edit = self.__filterJSONData("edit", fetched_json_data, editedData.getId(), editedData)
         self.readAndWrite.insert_data_into_json_file(update_entry_after_edit, self.FILE_PATH)
     """
+    params: purpose:str, fetchedData:str, comparedId:str/int, editedData:Book.
     purpose: 
         del: delete the data filter
         edit: Edit the edited data filter

@@ -1,5 +1,7 @@
 import json
+
 class Book: 
+
     def __init__(self, id, name, address, postcode, mobile, email):
         self.id = id
         self.name = name 
@@ -11,8 +13,6 @@ class Book:
 
 
     #SETTER AND GETTERS
-
-
 
     #Get ID
     def getId(self,): 
@@ -49,7 +49,9 @@ class Book:
         self.email = email
 
     
-        
+    """
+    RETURNS: Convert Book Data to JSON format
+    """
     def convertToJSONFormat(self):
         return     {
         "id": int(self.id),

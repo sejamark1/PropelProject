@@ -1,0 +1,100 @@
+*{ 
+    margin: 0;
+    font-family: sans-serif;
+
+}
+#header{ 
+    width: 100%;
+    height: 50px;
+    background-color: #0c4bcc;
+    color: white;
+}
+#logo{ 
+    padding: 12px 40px;
+    font-weight: 100;
+    letter-spacing: 2px;
+    font-size: 22px;
+}
+
+#view-book-table{ 
+    padding: 31px 0;
+    width: 60%; 
+}
+#bookstore-table{ 
+    width: 100%;
+}
+#table-header{ 
+    background-color: red;
+}
+#table-header > th{ 
+    padding-bottom: 10px;
+    padding-top: 10px;
+    
+}
+
+.row_book_data{ 
+    text-align: center;
+    padding: 15px 0 15px 0;
+    background: #6897a5;
+}
+
+.btn_row_book_data_del, .btn_row_book_data_edit{ 
+    width: 0px;
+    padding-left: 10px;
+}
+.btn_row_book_data_del > a > input{ 
+    height: 40px;
+    width: 90px;
+    background: red;
+    border-radius: 6px;
+    border: 1px solid #af7878;
+}
+.btn_row_book_data_edit > a > input{ 
+    height: 40px;
+    width: 90px;
+    background: rgb(54 125 159);
+    border-radius: 6px;
+    border: 1px solid #00ff9f;
+    font-weight: bold;
+    color: white;
+}
+
+
+#add-contact-form, #edit-form{ 
+    width: 40%;
+}
+#add-contact-form > p, #edit-form > p{ 
+    text-align: center;
+    background: red;
+    font-size: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: white;
+}
+
+#add-contact-form > form{
+    text-align: center;
+    padding-top: 20px;
+    background: wheat;
+}
+#add-form > label{ 
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.add-form-data-input{ 
+    width: 300px;
+    height: 19px;
+    border-radius: 3px;
+    border: 1px solid grey;
+}
+
+.add-form-submit{ 
+    height: 40px;
+    width: 90px;
+    background: rgb(54 125 159);
+    border-radius: 6px;
+    border: 1px solid #00ff9f;
+    font-weight: bold;
+    color: white;
+}
