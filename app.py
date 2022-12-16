@@ -10,7 +10,7 @@ from cryptography.fernet import Fernet
 
 
 
-
+#Cache jsonDataHandler.returnBookClassData()
 
 app = Flask(__name__) 
 FILE_PATH = "data/addressbook.json"
@@ -18,8 +18,6 @@ FILE_PATH = "data/addressbook.json"
 requestData = RequestData()
 readAndWrite = ReadAndWrite()
 jsonDataHandler = JSONHandler(FILE_PATH, readAndWrite)
-
-
 
 
 #VIEW/READ
@@ -89,6 +87,8 @@ def add_data():
     jsonDataHandler.addDataToJsonFile(newBook.convertToJSONFormat())
     return redirect("/")
 
+
+#SEARCH
 """
 Requests the data from the search form. 
 Returns updated search results and pass it to the index.html template 
@@ -99,6 +99,12 @@ def search_data():
     print("Searched " + r_search_result)
     address_book_search_result = jsonDataHandler.returnSearchResults(r_search_result)
     return render_template("index.html", booksData = address_book_search_result, editpage="no", is_it_search="yes", queryData = str(r_search_result))
+
+
+
+
+
+
 
 if __name__ == "__main__": 
     app.run(debug=True) 

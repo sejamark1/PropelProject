@@ -22,7 +22,10 @@ class RequestData:
         r_email = request.form["contactEmail"]
         newBook = Book(generate_unique_id, r_name, r_address, r_postcode, r_mobile, r_email)
         return newBook
-    
+    """
+    return: r_search_results:str 
+    Returns search result from search box.
+    """
     def requestSearchForm(self,): 
         r_search_results = request.form["searchResults"]
         return r_search_results
