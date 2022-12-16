@@ -16,7 +16,7 @@
         <div id="search_box"> 
             <form action="/search" method="post" >
                 <input id="search_results" type="text" name="searchResults" placeholder="Search...">
-                <input  type="submit" value="Search" />
+                <input id="search_submit"  type="submit" value="Search" />
             </form> 
 
         </div>
@@ -24,10 +24,16 @@
 
     {% if editpage == "no" %}
     <div id="main-container" style="display: flex">
-
+        <p style="display: none;">This is home page with home data</p>
         {%if is_it_search == "yes"%}
-            <p id="search_result_data">Your search result for: {{queryData}}</p>
+            {%if queryData == "" %}
+                <p id="search_result_data">You need to enter search results</p>
+            {%else%}
+                <p id="search_result_data">Your search result for: {{queryData}}</p>
+
+            {%endif%}
         {%endif%}
+
         <div id="view-book-table">
             <table id="bookstore-table">
                 <tr id="table-header">
@@ -54,6 +60,7 @@
                         <a href="{{url_for ('edit_data_and_submit_to_json_file', id=book.getId())}}">
                             <input type="submit" value="EDIT" />
                         </a>
+
                     </td>
                 </tr>
                 {%endfor%}
@@ -65,19 +72,19 @@
 
 
 
-        
+
         <div id="add-contact-form">
-            <p>Add your book</p>
+            <p>Add Contact</p>
             <form id="add-form" action="/add" method="post" >
-                <label>Name</label> 
+                <label style="margin-right: 23px;">Name</label> 
                 <input class="add-form-data-input" type="text" id="contact_name" name="contactName"><br>
-                <label>Address</label>
+                <label style="margin-right: 5px;">Address</label>
                 <input class="add-form-data-input" type="text" id="contact_address" name="contactAddress"><br>
-                <label>Postcode</label>
+                <label style="margin-right: 0;">Postcode</label>
                 <input class="add-form-data-input" type="text" id="contact_postcode" name="contactPostcode"><br>
-                <label>Mobile</label>
+                <label style="margin-right: 22px;">Mobile</label>
                 <input class="add-form-data-input" type="text" id="contact_mobile" name="contactMobile"  ><br>
-                <label>Email</label>
+                <label style="margin-right: 33px;">Email</label>
                 <input class="add-form-data-input" type="text" id="contact_email" name="contactEmail" ><br>
                 <input class="add-form-submit" type="submit" value="Add Contact" />
 
@@ -92,6 +99,8 @@
         {% if editpage == "yes"%}
         <div id="edit-form">
             <p>Add your book</p>
+            <p style="display: none;">This is the edit page for a single data</p>
+
             <form action="/submit-edit" method="post" >
                 <label>Name</label>
                 <input class="add-form-data-input" type="text" id="contact_name" name="contactName" value="{{dataById.getName()}}"><br>

@@ -6,10 +6,13 @@ from mypyfiles.addressBook import Book
 from mypyfiles.readAndWriteFiles import ReadAndWrite
 from mypyfiles.requestData import RequestData
 
+from cryptography.fernet import Fernet
+
+
+
 
 
 app = Flask(__name__) 
-
 FILE_PATH = "data/addressbook.json"
 
 requestData = RequestData()
@@ -58,8 +61,6 @@ return:
 @app.route("/edit/<int:id>") 
 def edit_data_and_submit_to_json_file(id): 
     book_data_by_id = jsonDataHandler.getJsonDataById(id)
-    print("Edit")
-
     readAndWrite.write_current_editId(id)
     return render_template("index.html", dataById = book_data_by_id, editpage="yes")
 
@@ -88,7 +89,10 @@ def add_data():
     jsonDataHandler.addDataToJsonFile(newBook.convertToJSONFormat())
     return redirect("/")
 
-
+"""
+Requests the data from the search form. 
+Returns updated search results and pass it to the index.html template 
+"""
 @app.route("/search", methods=["GET", "POST"])
 def search_data(): 
     r_search_result = requestData.requestSearchForm() 

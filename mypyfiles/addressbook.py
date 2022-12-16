@@ -1,22 +1,34 @@
 import json
+from cryptography.fernet import Fernet
 
 class Book: 
 
     def __init__(self, id, name, address, postcode, mobile, email):
+        self.key = Fernet.generate_key()
+        self.fernet = Fernet(self.key)
         self.id = id
-        self.name = name 
-        self.address = address 
-        self.postcode = postcode
-        self.mobile = mobile
-        self.email = email 
+        self.encryptedId = self.fernet.encrypt(str(self.id).encode())
+        self.name = self.__if_book_param_empty(name) 
+        self.address = self.__if_book_param_empty(address)  
+        self.postcode = self.__if_book_param_empty(postcode)  
+        self.mobile = self.__if_book_param_empty(mobile)  
+        self.email = self.__if_book_param_empty(email)   
 
 
+
+    def __if_book_param_empty(self, var): 
+        if(str(var) == ""): 
+            return "______"
+        else: 
+            return var
 
     #SETTER AND GETTERS
 
     #Get ID
     def getId(self,): 
         return self.id
+    def getEncryptedId(self,): 
+        return self.fernet.encrypt(str(self.id).encode())
 
     #Get and set name 
     def getName(self,): 
